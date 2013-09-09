@@ -24,6 +24,17 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+	
+	// Retrieves a count of droplets on your account.
+	// Returns the value, or false on failure.
+	public function droplets_count() {
+		$response = $this->droplets();
+		if ($response) {
+			return count($response);
+		} else {
 			return false;
 		}
 	}
@@ -39,10 +50,25 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
+	// Creates a new Droplet.
+	// Returns an array of new droplet parameters on success, or false on failure.
+	public function droplet_new($name, $size_id, $image_id, $region_id) {
+		$response = $this->make_get_request("droplets/new?name=".$name."&size_id=".$size_id."&image_id=".$image_id."&region_id=".$region_id."&");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return $response[1]['droplet'];
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+		
 	// Reboots a droplet.
 	// Returns the event_id on success, or false on failure.
 	public function droplet_reboot($dropletid) {
@@ -54,7 +80,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -69,7 +95,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 
@@ -84,7 +110,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -99,7 +125,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -114,7 +140,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -129,7 +155,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}	
 
@@ -144,7 +170,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}	
 
@@ -159,7 +185,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -174,7 +200,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -189,7 +215,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}	
 	
@@ -204,7 +230,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}	
 
@@ -219,7 +245,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -234,7 +260,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -249,7 +275,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -264,7 +290,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -279,9 +305,20 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
+	
+	// Retrieves a count of images on your account.
+	// Returns the value, or false on failure.
+	public function images_count() {
+		$response = $this->images();
+		if ($response) {
+			return count($response);
+		} else {
+			return false;
+		}
+	}	
 	
 	// Retrieves information on the specified machine-image.
 	// Returns an array on success.
@@ -294,7 +331,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
@@ -309,7 +346,7 @@ class DigitalOcean {
 				return false;
 			}
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 		
@@ -320,13 +357,13 @@ class DigitalOcean {
 		if ($this->was_response_ok($response[0])) {
 			return $response[1];
 		} else {
-			return false;
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
 		}
 	}
 	
 	protected function make_get_request($url) {
 		$urltoget = base_url.$url."client_id=".$this->client_id."&api_key=".$this->api_key;
-		$response = file_get_contents($urltoget);
+		$response = @file_get_contents($urltoget);
 		return array($http_response_header[0], json_decode($response, true));
 	}
 	
