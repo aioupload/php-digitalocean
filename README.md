@@ -5,7 +5,7 @@ Client Library for DigitalOcean cloud service API.
 Hope you find it useful! GPL licensed, so feel free to do with it what you want!
 
 Requirements
-- PHP 5.3
+- PHP 5+ (I developed using 5.3.3)
 - A valid DigitalOcean account with a client id and api key (get them from the DigitalOcean website).
 
 Installation
