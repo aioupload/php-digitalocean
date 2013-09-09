@@ -6,7 +6,7 @@ Hope you find it useful! GPL licensed, so feel free to do with it what you want!
 
 Requirements
 - PHP 5.3
-- A valid DigitalOcean with a client id and api key (get them from the DigitalOcean website).
+- A valid DigitalOcean account with a client id and api key (get them from the DigitalOcean website).
 
 Installation
 - Clone project
