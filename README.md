@@ -2,7 +2,7 @@ php-digitalocean
 ================
 
 Client Library for DigitalOcean cloud service API.
-Hope you find it useful!
+Hope you find it useful! GPL licensed, so feel free to do with it what you want!
 
 Requirements
 - PHP 5.3
