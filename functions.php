@@ -361,6 +361,82 @@ class DigitalOcean {
 		}
 	}
 	
+	// Retrieves a list of available SSH-keys.
+	// Returns a multidimensional array of SSH-keys, or throws an exception on error.
+	public function ssh_keys() {
+		$response = $this->make_get_request("ssh_keys/?");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return $response[1]['ssh_keys'];
+			} else {
+				throw new Exception($response[1]['error_message']);
+			}
+		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+
+	// Retrieves information on the specified SSH-key
+	// Returns an array on success, or throws an exception on error.
+	public function ssh_key_info($sshkeyid) {
+		$response = $this->make_get_request("ssh_keys/".$sshkeyid."/?");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return $response[1]['ssh_key'];
+			} else {
+				throw new Exception($response[1]['error_message']);
+			}
+		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+
+	// Retrieves information on the specified SSH-key.
+	// Returns an array of details on the new SSH-key similar to ssh_key_info() on success, or throws an exception on error.
+	public function ssh_key_new($name, $sshpubkey) {
+		$response = $this->make_get_request("ssh_keys/new/?name=".$name."&ssh_pub_key=".$sshpubkey."&");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return $response[1]['ssh_key'];
+			} else {
+				throw new Exception($response[1]['error_message']);
+			}
+		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+	
+	// Destroys an SSH-key.
+	// Returns true on success, or throws an exception on error.
+	public function ssh_key_destroy($sshkeyid) {
+		$response = $this->make_get_request("ssh_keys/".$sshkeyid."/destroy/?");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return true;
+			} else {
+				throw new Exception($response[1]['error_message']);
+			}
+		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+	
+	// Retrieves a list of registered domains.
+	// Returns a multidimensional array of domains, or throws an exception on error.
+	public function domains() {
+		$response = $this->make_get_request("domains/?");
+		if ($this->was_response_ok($response[0])) {
+			if ($response[1]['status'] == "OK") {
+				return $response[1]['domains'];
+			} else {
+				throw new Exception($response[1]['error_message']);
+			}
+		} else {
+			throw new Exception('Non-200 HTTP status code. Check your API key or method');
+		}
+	}
+	
+			
 	protected function make_get_request($url) {
 		$urltoget = base_url.$url."client_id=".$this->client_id."&api_key=".$this->api_key;
 		$response = @file_get_contents($urltoget);
